@@ -1,0 +1,14 @@
+<svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Elemento Outline" clip-path="url(#clip0_2619_2292)">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M28.0083 0.107156C27.9901 0.0547036 28.0292 0 28.0847 0H61.1001C61.1356 0 61.167 0.023057 61.1774 0.056874L76.3419 49.0509C76.3579 49.1029 76.3192 49.1556 76.2646 49.1556H54.285C54.2582 49.1556 54.2389 49.1811 54.2462 49.207L66.8521 93.5825C66.8767 93.6686 66.7638 93.7248 66.71 93.6532L17.7214 28.5061C17.6814 28.4528 17.7194 28.3768 17.786 28.3768H37.7343C37.7621 28.3768 37.7815 28.3494 37.7724 28.3232L28.0083 0.107156Z" fill="url(#paint0_linear_2619_2292)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_2619_2292" x1="11.8358" y1="7.0253" x2="89.3115" y2="82.9679" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_2619_2292">
+<rect width="94" height="94" fill="white"/>
+</clipPath>
+</defs>
+</svg>
