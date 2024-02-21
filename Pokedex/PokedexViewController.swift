@@ -50,7 +50,12 @@ extension PokedexViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath) as! PokemonTableViewCell
         let pokemon = dataSource[indexPath.row]
         cell.configure(with: pokemon)
-
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let pokemon = dataSource[indexPath.row]
+        let pokemonProfileViewController = PokemonProfileViewController(pokemon: pokemon)
+        navigationController?.pushViewController(pokemonProfileViewController, animated: true)
     }
 }
