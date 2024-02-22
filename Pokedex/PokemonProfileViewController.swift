@@ -58,7 +58,6 @@ class PokemonProfileViewController: UIViewController {
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 15)
         label.textColor = .darkGray
-        label.text = "Há uma semente de planta nas costas desde o dia em que este Pokémon nasce. A semente cresce lentamente."
         return label
     }()
     
@@ -66,7 +65,6 @@ class PokemonProfileViewController: UIViewController {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
         feature.title.text = "Weight"
-        feature.data.text = "6,9 kg"
         return feature
     }()
     
@@ -74,7 +72,6 @@ class PokemonProfileViewController: UIViewController {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
         feature.title.text = "Height"
-        feature.data.text = "0,7 m"
         return feature
     }()
     
@@ -154,12 +151,23 @@ class PokemonProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-        configurePokemon()
+        configurePokemonProfile()
     }
     
-    func configurePokemon() {
+    func configurePokemonProfile() {
         pokemonName.text = pokemon.name
-        pokemonNumber.text = String(pokemon.id)
+        pokemonNumber.text = "N° \(pokemon.id)"
+        primaryTypeView.configure(with: pokemon.type[0])
+
+        if pokemon.type.count > 1 {
+            secondaryTypeView.isHidden = false
+            secondaryTypeView.configure(with: pokemon.type[1])
+        }
+
+        pokemonDescription.text = pokemon.description
+        pokemonWeight.data.text = pokemon.profile.weight
+        pokemonHeight.data.text = pokemon.profile.height
+
     }
     
     private func configureUI() {
