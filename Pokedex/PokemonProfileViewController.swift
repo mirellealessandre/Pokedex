@@ -81,7 +81,7 @@ class PokemonProfileViewController: UIViewController {
         stackView.addArrangedSubviews([pokemonWeight, pokemonHeight])
         stackView.axis = .horizontal
         stackView.spacing = 20
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
@@ -98,42 +98,23 @@ class PokemonProfileViewController: UIViewController {
         feature.title.text = "Ability"
         return feature
     }()
-
-    private lazy var secondFeatureStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubviews([pokemonCategory, pokemonAbility])
-        stackView.axis = .horizontal
-        stackView.spacing = 20
-        stackView.distribution = .fillEqually
-        return stackView
+    
+//    private lazy var secondFeatureStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.addArrangedSubviews([pokemonCategory, pokemonAbility])
+//        stackView.axis = .horizontal
+//        stackView.spacing = 20
+//        stackView.distribution = .fillProportionally
+//        return stackView
+//    }()
+    
+    private lazy var pokemonAbility2: PokemonFeature = {
+        let feature = PokemonFeature()
+        feature.translatesAutoresizingMaskIntoConstraints = false
+        return feature
     }()
     
-    private lazy var pokemonWeaknessTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .natural
-        label.numberOfLines = 0
-        label.font = .boldSystemFont(ofSize: 20)
-        label.textColor = .black
-        label.text = "Fraquezas"
-        return label
-    }()
-    
-    private lazy var pokemonWeaknessCard: PokemonWeaknessView = {
-        let view = PokemonWeaknessView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.firstView.text = "Fogo"
-        view.firstView.backgroundColor = .orange
-        view.secondView.text = "Psíquico"
-        view.secondView.backgroundColor = .systemPink
-        view.thirdView.text = "Voador"
-        view.thirdView.backgroundColor = .blue
-        view.fourthView.text = "Gelo"
-        view.fourthView.backgroundColor = .cyan
-        return view
-    }()
-
     var pokemon: Pokemon
     
     init(pokemon: Pokemon) {
@@ -166,11 +147,12 @@ class PokemonProfileViewController: UIViewController {
         pokemonWeight.data.text = pokemon.profile.weight
         pokemonHeight.data.text = pokemon.profile.height
         pokemonCategory.data.text = pokemon.species
-        pokemonAbility.data.text = pokemon.profile.ability[0][0]
+        pokemonAbility.data.text = pokemon.profile.abilities[0].name
+        pokemonAbility2.data.text = pokemon.profile.abilities[0].name
     }
     
     private func configureUI() {
-        view.addSubviews([pokemonImage, pokemonName, pokemonNumber, typeStackView, pokemonDescription, firstFeatureStackView, secondFeatureStackView, pokemonWeaknessTitle, pokemonWeaknessCard])
+        view.addSubviews([pokemonImage, pokemonName, pokemonNumber, typeStackView, pokemonDescription, firstFeatureStackView, pokemonCategory, pokemonAbility, pokemonAbility2])
         
         NSLayoutConstraint.activate([
             pokemonImage.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -194,15 +176,15 @@ class PokemonProfileViewController: UIViewController {
             firstFeatureStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             firstFeatureStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             
-            secondFeatureStackView.topAnchor.constraint(equalTo: firstFeatureStackView.bottomAnchor, constant: 100),
-            secondFeatureStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            secondFeatureStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            pokemonCategory.topAnchor.constraint(equalTo: firstFeatureStackView.bottomAnchor, constant: 100),
+            pokemonCategory.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             
-            pokemonWeaknessTitle.topAnchor.constraint(equalTo: secondFeatureStackView.bottomAnchor, constant: 100),
-            pokemonWeaknessTitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-
-            pokemonWeaknessCard.topAnchor.constraint(equalTo: pokemonWeaknessTitle.bottomAnchor, constant: 15),
-            pokemonWeaknessCard.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            pokemonAbility.topAnchor.constraint(equalTo: firstFeatureStackView.bottomAnchor, constant: 100),
+            pokemonAbility.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pokemonAbility.trailingAnchor.constraint(equalTo: pokemonCategory.trailingAnchor, constant: -20),
+            
+            pokemonAbility2.topAnchor.constraint(equalTo: pokemonAbility.bottomAnchor, constant: 60),
+            pokemonAbility2.centerXAnchor.constraint(equalTo: pokemonAbility.centerXAnchor),
         ])
     }
 }

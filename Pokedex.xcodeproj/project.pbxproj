@@ -18,7 +18,6 @@
 		701576452B67ED7B0094684C /* PokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701576442B67ED7B0094684C /* PokemonService.swift */; };
 		70B0E9422B7FA8690087D914 /* PokemonProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B0E9412B7FA8690087D914 /* PokemonProfileViewController.swift */; };
 		70B261922B765BA50015C78F /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B261912B765BA50015C78F /* BackgroundView.swift */; };
-		70BE88942B86464B004D118C /* PokemonWeaknessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BE88932B86464B004D118C /* PokemonWeaknessView.swift */; };
 		70D5D4F12B828D8500CE097F /* PokemonFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5D4F02B828D8500CE097F /* PokemonFeature.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +35,6 @@
 		701576442B67ED7B0094684C /* PokemonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonService.swift; sourceTree = "<group>"; };
 		70B0E9412B7FA8690087D914 /* PokemonProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonProfileViewController.swift; sourceTree = "<group>"; };
 		70B261912B765BA50015C78F /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		70BE88932B86464B004D118C /* PokemonWeaknessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonWeaknessView.swift; sourceTree = "<group>"; };
 		70D5D4F02B828D8500CE097F /* PokemonFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 				70B261912B765BA50015C78F /* BackgroundView.swift */,
 				70B0E9412B7FA8690087D914 /* PokemonProfileViewController.swift */,
 				70D5D4F02B828D8500CE097F /* PokemonFeature.swift */,
-				70BE88932B86464B004D118C /* PokemonWeaknessView.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -183,7 +180,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				70D5D4F12B828D8500CE097F /* PokemonFeature.swift in Sources */,
-				70BE88942B86464B004D118C /* PokemonWeaknessView.swift in Sources */,
 				70B261922B765BA50015C78F /* BackgroundView.swift in Sources */,
 				70B0E9422B7FA8690087D914 /* PokemonProfileViewController.swift in Sources */,
 				7015763F2B67ED010094684C /* Pokemon.swift in Sources */,
