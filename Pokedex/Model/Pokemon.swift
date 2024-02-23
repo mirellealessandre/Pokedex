@@ -62,15 +62,25 @@ struct Profile {
     let height: String
     let weight: String
     let egg: [String]?
-    let ability: [[String]]
+    let abilities: [Ability]
     let gender: String
     
     init(from dict: [String: Any]) {
         self.height = dict["height"] as! String
         self.weight = dict["weight"] as! String
         self.egg = dict["egg"] as? [String]
-        self.ability = dict["ability"] as! [[String]]
+        self.abilities = (dict["ability"] as! [[String]]).map { Ability(from: $0) }
         self.gender = dict["gender"] as! String
+    }
+}
+
+struct Ability {
+    let name: String
+    let hidden: String
+    
+    init(from dict: [String]) {
+        self.name = dict[0]
+        self.hidden = dict[1]
     }
 }
 
