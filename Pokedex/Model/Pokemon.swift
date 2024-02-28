@@ -4,7 +4,7 @@ struct Pokemon {
     let id: Int
     let name: String
     let type: [Pokemon.Element]
-    let species: String
+    let category: String
     let description: String
     let image: Image
     let profile: Profile
@@ -15,7 +15,7 @@ struct Pokemon {
         self.id = dict["id"] as! Int
         self.name = (dict["name"] as! [String: String])["english"]!
         self.type = (dict["type"] as! [String]).compactMap { Pokemon.Element(rawValue: $0) }
-        self.species = dict["species"] as! String
+        self.category = dict["species"] as! String
         self.description = dict["description"] as! String
         self.image = Image(from: dict["image"] as! [String: String])
         self.profile = Profile(from: dict["profile"] as! [String: Any])
@@ -81,6 +81,16 @@ struct Ability {
     init(from dict: [String]) {
         self.name = dict[0]
         self.hidden = dict[1]
+    }
+}
+
+struct Gender {
+    let femalePercentage: Double
+    let malePercentage: Double
+    
+    init(femalePercentage: Double, malePercentage: Double) {
+        self.femalePercentage = femalePercentage
+        self.malePercentage = malePercentage
     }
 }
 
