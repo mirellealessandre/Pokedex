@@ -1,13 +1,23 @@
 import UIKit
 
 final class PokemonFeature: UIView {
-    lazy var title: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var dataCard: UIView = {
+    private lazy var dataLabel: UILabel = {
+       let label = UILabel()
+       label.translatesAutoresizingMaskIntoConstraints = false
+       label.textAlignment = .center
+       label.numberOfLines = 0
+       label.font = .boldSystemFont(ofSize: 15)
+       label.textColor = .black
+       return label
+   }()
+    
+    private lazy var dataCardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 2
@@ -15,39 +25,33 @@ final class PokemonFeature: UIView {
         view.layer.cornerRadius = 15
         return view
     }()
-    
-     lazy var data: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.font = .boldSystemFont(ofSize: 15)
-        label.textColor = .black
-        return label
-    }()
-    
+
     init() {
         super.init(frame: .zero)
-        addSubviews([title, dataCard])
-        dataCard.addSubview(data)
+        addSubviews([titleLabel, dataLabel, dataCardView])
+        dataCardView.addSubview(dataLabel)
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: topAnchor),
-            title.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        
+            dataCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            dataCardView.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            dataCard.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
-            dataCard.leadingAnchor.constraint(equalTo: leadingAnchor),
-            
-            data.topAnchor.constraint(equalTo: dataCard.topAnchor, constant: 5),
-            data.centerXAnchor.constraint(equalTo: dataCard.centerXAnchor),
-            data.leadingAnchor.constraint(equalTo: dataCard.leadingAnchor, constant: 10),
-            data.bottomAnchor.constraint(equalTo: dataCard.bottomAnchor, constant: -5),
+            dataLabel.topAnchor.constraint(equalTo: dataCardView.topAnchor, constant: 5),
+            dataLabel.centerXAnchor.constraint(equalTo: dataCardView.centerXAnchor),
+            dataLabel.leadingAnchor.constraint(equalTo: dataCardView.leadingAnchor, constant: 10),
+            dataLabel.bottomAnchor.constraint(equalTo: dataCardView.bottomAnchor, constant: -5),
         ])
-        
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureFeatures(title: String, data: String) {
+        titleLabel.text = title
+        dataLabel.text = data
     }
 }
 
