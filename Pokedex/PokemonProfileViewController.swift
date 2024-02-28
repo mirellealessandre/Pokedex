@@ -64,14 +64,12 @@ class PokemonProfileViewController: UIViewController {
     private lazy var pokemonWeight: PokemonFeature = {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
-        feature.title.text = "Weight"
         return feature
     }()
     
     private lazy var pokemonHeight: PokemonFeature = {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
-        feature.title.text = "Height"
         return feature
     }()
     
@@ -88,31 +86,19 @@ class PokemonProfileViewController: UIViewController {
     private lazy var pokemonCategory: PokemonFeature = {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
-        feature.title.text = "Category"
         return feature
     }()
     
     private lazy var pokemonAbility: PokemonFeature = {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
-        feature.title.text = "Ability"
         return feature
     }()
-    
-//    private lazy var secondFeatureStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.addArrangedSubviews([pokemonCategory, pokemonAbility])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 20
-//        stackView.distribution = .fillProportionally
-//        return stackView
-//    }()
-    
-    private lazy var pokemonAbility2: PokemonFeature = {
-        let feature = PokemonFeature()
-        feature.translatesAutoresizingMaskIntoConstraints = false
-        return feature
+            
+    private lazy var pokemonGender: GenderView = {
+        let view = GenderView(femalePercentage: 50, malePercentage: 50)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     var pokemon: Pokemon
@@ -136,23 +122,34 @@ class PokemonProfileViewController: UIViewController {
     func configurePokemonProfile() {
         pokemonName.text = pokemon.name
         pokemonNumber.text = "N° \(pokemon.id)"
+        pokemonDescription.text = pokemon.description
         primaryTypeView.configure(with: pokemon.type[0])
 
         if pokemon.type.count > 1 {
             secondaryTypeView.isHidden = false
             secondaryTypeView.configure(with: pokemon.type[1])
         }
+        pokemonWeight.configureFeatures(title: "Weight", data: pokemon.profile.weight)
+        pokemonHeight.configureFeatures(title: "Height", data: pokemon.profile.height)
+        pokemonCategory.configureFeatures(title: "Category", data: pokemon.category)
 
-        pokemonDescription.text = pokemon.description
-        pokemonWeight.data.text = pokemon.profile.weight
-        pokemonHeight.data.text = pokemon.profile.height
-        pokemonCategory.data.text = pokemon.species
-        pokemonAbility.data.text = pokemon.profile.abilities[0].name
-        pokemonAbility2.data.text = pokemon.profile.abilities[0].name
+        for ability in pokemon.profile.abilities {
+            if ability.hidden == "false" {
+                pokemonAbility.configureFeatures(title: "Ability", data: ability.name)
+            }
+        }
+        
+        if pokemon.profile.gender == "87.5:12.5" {
+            pokemonGender.configureGenderView(pokemonMalePercentage: 87.5, pokemonFemalePercentage: 12.5)
+        } else if pokemon.profile.gender == "Genderless" {
+            pokemonGender.isHidden = true
+        } else {
+            pokemonGender.configureGenderView(pokemonMalePercentage: 50, pokemonFemalePercentage: 50)
+        }
     }
     
     private func configureUI() {
-        view.addSubviews([pokemonImage, pokemonName, pokemonNumber, typeStackView, pokemonDescription, firstFeatureStackView, pokemonCategory, pokemonAbility, pokemonAbility2])
+        view.addSubviews([pokemonImage, pokemonName, pokemonNumber, typeStackView, pokemonDescription, firstFeatureStackView, pokemonCategory, pokemonAbility, pokemonGender])
         
         NSLayoutConstraint.activate([
             pokemonImage.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -183,8 +180,10 @@ class PokemonProfileViewController: UIViewController {
             pokemonAbility.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pokemonAbility.trailingAnchor.constraint(equalTo: pokemonCategory.trailingAnchor, constant: -20),
             
-            pokemonAbility2.topAnchor.constraint(equalTo: pokemonAbility.bottomAnchor, constant: 60),
-            pokemonAbility2.centerXAnchor.constraint(equalTo: pokemonAbility.centerXAnchor),
+            pokemonGender.topAnchor.constraint(equalTo: pokemonAbility.bottomAnchor, constant: 100),
+            pokemonGender.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pokemonGender.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            pokemonGender.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -100),
         ])
     }
 }
