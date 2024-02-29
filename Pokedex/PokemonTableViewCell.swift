@@ -60,13 +60,15 @@ class PokemonTableViewCell: UITableViewCell {
     private func configureCell() {
         NSLayoutConstraint.activate([
             pokemonImageCard.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            pokemonImageCard.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 15),
+            pokemonImageCard.leadingAnchor.constraint(greaterThanOrEqualTo: pokemonName.trailingAnchor, constant: 15),
             pokemonImageCard.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             pokemonImageCard.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             
-            pokemonImageOutline.centerYAnchor.constraint(equalTo: pokemonImageCard.centerYAnchor),
+            pokemonImageOutline.topAnchor.constraint(equalTo: pokemonImageCard.topAnchor, constant: 5),
             pokemonImageOutline.centerXAnchor.constraint(equalTo: pokemonImageCard.centerXAnchor),
-
+            pokemonImageOutline.leadingAnchor.constraint(equalTo: pokemonImageCard.leadingAnchor, constant: 5),
+            pokemonImageOutline.bottomAnchor.constraint(equalTo: pokemonImageCard.bottomAnchor, constant: -5),
+            
             pokemonImage.topAnchor.constraint(equalTo: pokemonImageCard.topAnchor, constant: 5),
             pokemonImage.centerXAnchor.constraint(equalTo: pokemonImageCard.centerXAnchor),
             pokemonImage.leadingAnchor.constraint(equalTo: pokemonImageCard.leadingAnchor, constant: 20),

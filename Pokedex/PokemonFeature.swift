@@ -4,6 +4,10 @@ final class PokemonFeature: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .darkGray
         return label
     }()
     
@@ -12,7 +16,7 @@ final class PokemonFeature: UIView {
        label.translatesAutoresizingMaskIntoConstraints = false
        label.textAlignment = .center
        label.numberOfLines = 0
-       label.font = .boldSystemFont(ofSize: 15)
+       label.font = .boldSystemFont(ofSize: 20)
        label.textColor = .black
        return label
    }()
@@ -20,8 +24,8 @@ final class PokemonFeature: UIView {
     private lazy var dataCardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.darkGray.cgColor
         view.layer.cornerRadius = 15
         return view
     }()
@@ -34,14 +38,17 @@ final class PokemonFeature: UIView {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-                        
+            
+            dataLabel.topAnchor.constraint(equalTo: dataCardView.topAnchor, constant: 10),
+            dataLabel.centerXAnchor.constraint(equalTo: dataCardView.centerXAnchor),
+            dataLabel.leadingAnchor.constraint(equalTo: dataCardView.leadingAnchor, constant: 40),
+            dataLabel.bottomAnchor.constraint(equalTo: dataCardView.bottomAnchor, constant: -10),
+            
             dataCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             dataCardView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dataCardView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dataCardView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            dataLabel.topAnchor.constraint(equalTo: dataCardView.topAnchor, constant: 5),
-            dataLabel.centerXAnchor.constraint(equalTo: dataCardView.centerXAnchor),
-            dataLabel.leadingAnchor.constraint(equalTo: dataCardView.leadingAnchor, constant: 10),
-            dataLabel.bottomAnchor.constraint(equalTo: dataCardView.bottomAnchor, constant: -5),
         ])
     }
     
@@ -50,7 +57,7 @@ final class PokemonFeature: UIView {
     }
     
     func configureFeatures(title: String, data: String) {
-        titleLabel.text = title
+        titleLabel.text = title.uppercased()
         dataLabel.text = data
     }
 }
