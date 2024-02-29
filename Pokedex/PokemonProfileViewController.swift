@@ -2,7 +2,7 @@ import UIKit
 
 class PokemonProfileViewController: UIViewController {
     private lazy var pokemonImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "imageTest2"))
+        let image = UIImageView(image: UIImage())
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
@@ -72,17 +72,7 @@ class PokemonProfileViewController: UIViewController {
         feature.translatesAutoresizingMaskIntoConstraints = false
         return feature
     }()
-    
-//    private lazy var weightAndHeightStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.addArrangedSubviews([pokemonWeight, pokemonHeight])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 20
-//        stackView.distribution = .fillProportionally
-//        return stackView
-//    }()
-    
+        
     private lazy var pokemonCategory: PokemonFeature = {
         let feature = PokemonFeature()
         feature.translatesAutoresizingMaskIntoConstraints = false
@@ -94,16 +84,6 @@ class PokemonProfileViewController: UIViewController {
         feature.translatesAutoresizingMaskIntoConstraints = false
         return feature
     }()
-
-//    private lazy var categoryAndAbilityStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.addArrangedSubviews([pokemonCategory, pokemonAbility])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 20
-//        stackView.distribution = .fillProportionally
-//        return stackView
-//    }()
     
     private lazy var pokemonGender: GenderView = {
         let view = GenderView(femalePercentage: 50, malePercentage: 50)
@@ -156,6 +136,24 @@ class PokemonProfileViewController: UIViewController {
         } else {
             pokemonGender.configureGenderView(pokemonMalePercentage: 50, pokemonFemalePercentage: 50)
         }
+        
+        fetchPokemonImage()
+    }
+    
+    private func fetchPokemonImage() {
+        let pokemonImageURL = pokemon.image.thumbnail
+        
+        guard let url = URL(string: pokemonImageURL) else { return }
+        
+        let getDataTask = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else { return }
+            
+            DispatchQueue.main.async {
+                let image = UIImage(data: data)
+                self.pokemonImage.image = image
+            }
+        }
+        getDataTask.resume()
     }
     
     private func configureUI() {
@@ -165,7 +163,8 @@ class PokemonProfileViewController: UIViewController {
             pokemonImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             pokemonImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pokemonImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 85),
-
+            pokemonImage.heightAnchor.constraint(equalToConstant: 100),
+            
             pokemonName.topAnchor.constraint(equalTo: pokemonImage.bottomAnchor, constant: 20),
             pokemonName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             pokemonName.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
@@ -182,21 +181,23 @@ class PokemonProfileViewController: UIViewController {
             pokemonDescription.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
             pokemonWeight.topAnchor.constraint(equalTo: pokemonDescription.bottomAnchor, constant: 40),
-            pokemonWeight.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            pokemonWeight.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            pokemonWeight.centerXAnchor.constraint(equalTo: pokemonCategory.centerXAnchor),
             
             pokemonHeight.topAnchor.constraint(equalTo: pokemonDescription.bottomAnchor, constant: 40),
-            pokemonHeight.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            pokemonHeight.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            pokemonHeight.centerXAnchor.constraint(equalTo: pokemonAbility.centerXAnchor),
             
             pokemonCategory.topAnchor.constraint(equalTo: pokemonWeight.bottomAnchor, constant: 20),
-            pokemonCategory.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            pokemonCategory.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
 
             pokemonAbility.topAnchor.constraint(equalTo: pokemonHeight.bottomAnchor, constant: 20),
-            pokemonAbility.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            pokemonAbility.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
                         
             pokemonGender.topAnchor.constraint(equalTo: pokemonCategory.bottomAnchor, constant: 100),
             pokemonGender.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pokemonGender.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            pokemonGender.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            pokemonGender.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
         ])
     }
 }

@@ -41,7 +41,7 @@ final class PokemonFeature: UIView {
             
             dataLabel.topAnchor.constraint(equalTo: dataCardView.topAnchor, constant: 10),
             dataLabel.centerXAnchor.constraint(equalTo: dataCardView.centerXAnchor),
-            dataLabel.leadingAnchor.constraint(equalTo: dataCardView.leadingAnchor, constant: 40),
+            dataLabel.leadingAnchor.constraint(equalTo: dataCardView.leadingAnchor, constant: 20),
             dataLabel.bottomAnchor.constraint(equalTo: dataCardView.bottomAnchor, constant: -10),
             
             dataCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
