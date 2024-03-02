@@ -160,9 +160,9 @@ class PokemonProfileViewController: UIViewController {
         view.addSubviews([pokemonImage, pokemonName, pokemonNumber, typeStackView, pokemonDescription,pokemonWeight, pokemonHeight, pokemonCategory, pokemonAbility, pokemonGender])
         
         NSLayoutConstraint.activate([
-            pokemonImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            pokemonImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             pokemonImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pokemonImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 85),
+            pokemonImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
             pokemonImage.heightAnchor.constraint(equalToConstant: 100),
             
             pokemonName.topAnchor.constraint(equalTo: pokemonImage.bottomAnchor, constant: 20),
@@ -175,6 +175,7 @@ class PokemonProfileViewController: UIViewController {
             
             typeStackView.topAnchor.constraint(equalTo: pokemonNumber.bottomAnchor, constant: 25),
             typeStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            typeStackView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             
             pokemonDescription.topAnchor.constraint(equalTo: typeStackView.bottomAnchor, constant: 25),
             pokemonDescription.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
@@ -182,14 +183,15 @@ class PokemonProfileViewController: UIViewController {
             
             pokemonWeight.topAnchor.constraint(equalTo: pokemonDescription.bottomAnchor, constant: 40),
             pokemonWeight.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            pokemonWeight.centerXAnchor.constraint(equalTo: pokemonCategory.centerXAnchor),
+            pokemonWeight.centerYAnchor.constraint(equalTo: pokemonHeight.centerYAnchor),
             
-            pokemonHeight.topAnchor.constraint(equalTo: pokemonDescription.bottomAnchor, constant: 40),
+            pokemonHeight.leadingAnchor.constraint(greaterThanOrEqualTo: pokemonWeight.trailingAnchor, constant: 20),
             pokemonHeight.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             pokemonHeight.centerXAnchor.constraint(equalTo: pokemonAbility.centerXAnchor),
-            
+
             pokemonCategory.topAnchor.constraint(equalTo: pokemonWeight.bottomAnchor, constant: 20),
             pokemonCategory.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            pokemonCategory.trailingAnchor.constraint(lessThanOrEqualTo: pokemonAbility.leadingAnchor, constant: 20),
 
             pokemonAbility.topAnchor.constraint(equalTo: pokemonHeight.bottomAnchor, constant: 20),
             pokemonAbility.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -197,7 +199,7 @@ class PokemonProfileViewController: UIViewController {
             pokemonGender.topAnchor.constraint(equalTo: pokemonCategory.bottomAnchor, constant: 100),
             pokemonGender.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pokemonGender.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            pokemonGender.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            pokemonGender.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
     }
 }
