@@ -1,19 +1,13 @@
 import UIKit
 
 class PokemonTableViewCell: UITableViewCell {
-    private lazy var pokemonImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "imageTeste.png"))
+    private lazy var pokemonImage: CustomImageViewCell = {
+        let image = CustomImageViewCell()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         return image
     }()
-    
-    private lazy var pokemonImageCard: BackgroundView = {
-        let background = BackgroundView()
-        background.translatesAutoresizingMaskIntoConstraints = false
-        return background
-    }()
-    
+        
     private lazy var pokemonImageOutline: BackgroundView = {
         let background = BackgroundView()
         background.translatesAutoresizingMaskIntoConstraints = false
@@ -53,26 +47,21 @@ class PokemonTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubviews([pokemonImageCard, pokemonImageOutline, pokemonImage, pokemonName, pokemonNumber, primaryTypeView, secondaryTypeView])
+        addSubviews([pokemonImageOutline, pokemonImage, pokemonName, pokemonNumber, primaryTypeView, secondaryTypeView])
         configureCell()
     }
     
     private func configureCell() {
         NSLayoutConstraint.activate([
-            pokemonImageCard.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            pokemonImageCard.leadingAnchor.constraint(greaterThanOrEqualTo: pokemonName.trailingAnchor, constant: 15),
-            pokemonImageCard.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            pokemonImageCard.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            pokemonImageOutline.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            pokemonImageOutline.leadingAnchor.constraint(greaterThanOrEqualTo: pokemonName.trailingAnchor, constant: 15),
+            pokemonImageOutline.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            pokemonImageOutline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             
-            pokemonImageOutline.topAnchor.constraint(equalTo: pokemonImageCard.topAnchor, constant: 5),
-            pokemonImageOutline.centerXAnchor.constraint(equalTo: pokemonImageCard.centerXAnchor),
-            pokemonImageOutline.leadingAnchor.constraint(equalTo: pokemonImageCard.leadingAnchor, constant: 5),
-            pokemonImageOutline.bottomAnchor.constraint(equalTo: pokemonImageCard.bottomAnchor, constant: -5),
-            
-            pokemonImage.topAnchor.constraint(equalTo: pokemonImageCard.topAnchor, constant: 5),
-            pokemonImage.centerXAnchor.constraint(equalTo: pokemonImageCard.centerXAnchor),
-            pokemonImage.leadingAnchor.constraint(equalTo: pokemonImageCard.leadingAnchor, constant: 20),
-            pokemonImage.bottomAnchor.constraint(equalTo: pokemonImageCard.bottomAnchor, constant: 5),
+            pokemonImage.topAnchor.constraint(equalTo: pokemonImageOutline.topAnchor, constant: 5),
+            pokemonImage.centerXAnchor.constraint(equalTo: pokemonImageOutline.centerXAnchor),
+            pokemonImage.leadingAnchor.constraint(equalTo: pokemonImageOutline.leadingAnchor, constant: 20),
+            pokemonImage.bottomAnchor.constraint(equalTo: pokemonImageOutline.bottomAnchor, constant: 5),
                         
             pokemonNumber.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             pokemonNumber.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
@@ -111,10 +100,15 @@ class PokemonTableViewCell: UITableViewCell {
             secondaryTypeView.configure(with: pokemon.type[1])
         }
         
-        pokemonImageCard.configureBackground(with: pokemon.type[0])
         pokemonImageOutline.configureBackground(with: pokemon.type[0])
         backgroundColor = pokemon.type[0].backgroundColorView
+        
+        if let url = URL(string: pokemon.image.thumbnail) {
+            pokemonImage.loadImageView(from: url)
+        }
     }
+    
+    
 }
 
 extension Pokemon.Element {
