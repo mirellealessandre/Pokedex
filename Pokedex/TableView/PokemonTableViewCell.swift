@@ -1,9 +1,10 @@
 import UIKit
 
-class PokemonTableViewCell: UITableViewCell {
+class PokemonTableViewCell: UITableViewCell {    
     private lazy var pokemonImage: CustomImageViewCell = {
         let image = CustomImageViewCell()
         image.translatesAutoresizingMaskIntoConstraints = false
+//        image.isHidden = true
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -11,6 +12,7 @@ class PokemonTableViewCell: UITableViewCell {
     private lazy var pokemonImageOutline: BackgroundView = {
         let background = BackgroundView()
         background.translatesAutoresizingMaskIntoConstraints = false
+//        background.isHidden = true
         return background
     }()
     
@@ -90,6 +92,17 @@ class PokemonTableViewCell: UITableViewCell {
         secondaryTypeView.isHidden = true
     }
 
+//    func setUpImage(with pokemon: Pokemon) {
+//        pokemonImage.isHidden = false
+//        pokemonImageOutline.isHidden = false
+//        pokemonImageOutline.configureBackground(with: pokemon.type[0])
+//        backgroundColor = pokemon.type[0].backgroundColorView
+//        
+//        if let url = URL(string: pokemon.image.thumbnail) {
+//            pokemonImage.loadImageView(from: url)
+//        }
+//    }
+    
     func configure(with pokemon: Pokemon) {
         pokemonNumber.text = "N° \(pokemon.id)"
         pokemonName.text = pokemon.name
@@ -106,6 +119,8 @@ class PokemonTableViewCell: UITableViewCell {
         if let url = URL(string: pokemon.image.thumbnail) {
             pokemonImage.loadImageView(from: url)
         }
+
+//        setUpImage(with: pokemon)
     }
     
     

@@ -5,7 +5,7 @@ let imageCache = NSCache<AnyObject, AnyObject>()
 final class CustomImageViewCell: UIImageView {
     var task: URLSessionDataTask!
     let spinner = UIActivityIndicatorView(style: .medium)
-    
+        
     func loadImageView(from url: URL) {
         image = nil
         
@@ -37,7 +37,7 @@ final class CustomImageViewCell: UIImageView {
         task.resume()
     }
     
-    func addSpinner() {
+    private func addSpinner() {
         addSubview(spinner)
         spinner.translatesAutoresizingMaskIntoConstraints = false
         
@@ -49,7 +49,7 @@ final class CustomImageViewCell: UIImageView {
         spinner.startAnimating()
     }
     
-    func removeSpinner() {
+    private func removeSpinner() {
         spinner.removeFromSuperview()
     }
 }
